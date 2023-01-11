@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--  -->
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.structure.css">
+    <link rel="stylesheet" href="jquery-ui/jquery-ui.theme.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="jquery-ui/jquery-ui.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- icon -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--  -->
+    <script src="jq.js" type="text/javascript"></script>
+</head>
+<style>
+    body{
+        /* background-image: "keval.jpg"; */
+        background-image: url("blur-abstract-bokeh-light-background-with-restaurant-coffee-shop_7192-1229.jpg") ;
+        /* height: 10%;
+        width: 10%; */
+        background-repeat: no-repeat;
+        background-size: 1600px 1400px;
+    }
+    img{
+        /* //background-repeat: no-repeat; */
+        width: 1600px;
+        height: 500px;
+        margin-top: 7em;
+        align-items: center;
+
+    }
+    h1{
+        border: 2px gray solid;
+        background-color: cornflowerblue;
+        text-align: center;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        font-style: italic;
+    }
+    #btn1{
+        border: 2px gray solid;
+        background-color: cornflowerblue;
+        text-align: center;
+        font-weight: bold;
+        font-family: 'Courier New', Courier, monospace;
+        font-style: italic;
+        height: 3em;
+        width: 9em;
+
+    }
+    th,td{
+        text-align: center;
+    }
+   
+    i{
+        color: black;
+    }
+    #btnadd,#btnclose{
+        background-color : cornflowerblue;
+    }
+   
+</style>
+<body>
+
+    <!-- use bootstrap container...... -->
+
+    <div class="container-fluid"> 
+        <h1>Event management</h1><br>
+        <button id="btn1">Add</button>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1></h1>
+        
+
+ 
+        
+      
+      
+        <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="font-size: medium;font-weight: bold;font-family: 'Courier New', Courier, monospace;background-color: cornflowerblue;">Enter Event Details..</h4>
+            </div>
+            <div class="modal-body">
+            
+            <!-- Value comes from the user -->
+            <input type="hidden" id="hff" value="" />
+            <input type="text" placeholder="Enter Event Name" name="eventname" class="inp" id="name1"><br><br>
+            <input type="text" placeholder="Enter City Name" name="city" class="inp" id="name2"><br><br>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="btnadd">Add</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" id='btnUpdate' style="display: none;">Update</button>
+            <button type="button" class="btn btn-default"  id="btnclear">clear</button>
+            
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="btnclose">Close</button>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+        
+    </div>
+    <!-- table to view data... -->
+    <div>
+        <table border="3em" style="font-weight: bold; width: 500px; height: 50px ; text-align:center;" align="center" id="table1">
+            <tr id="tr">
+                <th>num</th>
+                <th>event Name</th>
+                <th>city name</th>
+                <th colspan="2">opration</th>
+            </tr>
+        </table>
+        
+    </div>
+    <div>
+        <p><img src="26f8ed87aa5470b36a9bd3b5563656ee-removebg-preview.png" alt="image"></p>
+    </div>
+    <!-- <div>
+        <ol>
+            
+        </ol>
+    </div> -->
+
+    <!--javascipt code...  -->  
+<script>
+        
+    $(document).ready(function(){
+
+            var rownum = 1;
+
+        //open model to add button click ....
+            $("#btn1").click(function(){
+                $("#myModal").modal();
+
+            });
+            //add button click to save data and push in  table....
+            $('#btnadd').click(function(){
+
+                var no = rownum++;
+
+                // //
+                // var m = document.getElementById("table1");
+                // var m4 = m.previousElementSibling;
+                // var m5 = m4 + 1;
+
+                //
+                var name = $('input[name=eventname]').val();
+                var city = $('input[name=city]').val();
+                var updat = '<a class="update">update</a>';
+                var del = '<a class="delete"><i class="glyphicon glyphicon-trash"></i></a>';
+
+
+                //validation
+                if(name == '' || city == ''){
+                    alert("enter details...");
+                }
+                else{ // if data is available in input box than enter in table other wish show alert box...
+                    $('table').append('<tr>'+'<td>'+no+'</td>'+'<td>'+name+'</td>'+'<td>'+city+'</td>'+'<td>'+ updat +'</td>'+'<td>'+ del +'</td>'+'<tr>');
+                    $("#name1").val("");
+                    $("#name2").val("");
+
+                }
+                
+
+            });
+                // update button click  replace data in table
+        $('#btnUpdate').on('click', function () {
+        
+        var name, city;
+        
+        name = $("#name1").val();
+        city = $("#name2").val();
+
+        $('#table1  tr').eq($('#hff').val()).find('td').eq(1).html(name);
+        $('#table1  tr').eq($('#hff').val()).find('td').eq(2).html(city)
+
+        $('#btnadd').show(); //after updating update button is hide and add button show
+        $('#btnUpdate').hide();
+                
+        });
+        //click update link to open modal redirect data form table ...
+        $("#table1").on("click", ".update", function (e) {
+                $("#myModal").modal();
+                var r = $(this).closest('tr');
+                $('#hff').val($(r).index());
+                var td = $(r).find("td");
+                $('#name1').val($(td).eq(1).html());
+                $('#name2').val($(td).eq(2).html());
+                $('#btnadd').hide(); //if you click update button than hide a add button and show update butuon...
+                $('#btnUpdate').show();
+        });
+ 
+        // delete row in a table .... and also use confirm form user...
+        $("#table1").on("click", ".delete", function (e) {
+                if (confirm("delete this record ??????????")) {
+                    $(this).closest('tr').remove();
+                } else {
+                    e.preventDefault();
+                }
+            });
+
+        //clear button to clear data in inputbox...
+        $('#btnclear').on('click', function () {
+            $("#name1").val("");
+            $("#name2").val("");
+        });
+    
+    });
+
+        
+
+</script>
+</body>
+</html>
